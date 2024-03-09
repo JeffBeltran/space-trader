@@ -1,9 +1,8 @@
 import { GetStatusResponse } from "@/types/space-traders-api";
 import { DateTime } from "luxon";
+import { Link } from "./catalyst/link";
 
 export function ServerStatus({ status }: { status: GetStatusResponse }) {
-    console.log(status);
-
     return (
         <div>
             <div className="px-4 sm:px-0">
@@ -34,7 +33,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">
-                            Resets In
+                            Resets
                         </dt>
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                             {DateTime.fromISO(
@@ -47,7 +46,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                             Total Agents
                         </dt>
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                            {status.stats.agents}
+                            {status.stats.agents.toLocaleString()}
                         </dd>
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -55,7 +54,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                             Total Ships
                         </dt>
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                            {status.stats.ships}
+                            {status.stats.ships.toLocaleString()}
                         </dd>
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -63,7 +62,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                             Total Systems
                         </dt>
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                            {status.stats.systems}
+                            {status.stats.systems.toLocaleString()}
                         </dd>
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -71,44 +70,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                             Total Waypoints
                         </dt>
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                            {status.stats.waypoints}
-                        </dd>
-                    </div>
-                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt className="text-sm font-medium leading-6 text-gray-900">
-                            Most Credits
-                        </dt>
-                        <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            <ul
-                                role="list"
-                                className="divide-y divide-gray-100 rounded-md border border-gray-200"
-                            >
-                                {status.leaderboards.mostCredits.map(
-                                    (mostCredit, idx) => {
-                                        return (
-                                            <li
-                                                key={
-                                                    mostCredit.agentSymbol + idx
-                                                }
-                                                className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6"
-                                            >
-                                                <div className="flex w-0 flex-1 items-center">
-                                                    <div className="flex min-w-0 flex-1 gap-2">
-                                                        <span className="truncate font-medium">
-                                                            {
-                                                                mostCredit.agentSymbol
-                                                            }
-                                                        </span>
-                                                        <span className="flex-shrink-0 text-gray-400">
-                                                            {mostCredit.credits}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        );
-                                    }
-                                )}
-                            </ul>
+                            {status.stats.waypoints.toLocaleString()}
                         </dd>
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -132,15 +94,63 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                                             >
                                                 <div className="flex w-0 flex-1 items-center">
                                                     <div className="flex min-w-0 flex-1 gap-2">
-                                                        <span className="truncate font-medium">
+                                                        <Link
+                                                            className="truncate font-medium"
+                                                            href={route(
+                                                                "agents.show",
+                                                                mostSubmittedChart.agentSymbol
+                                                            )}
+                                                        >
                                                             {
                                                                 mostSubmittedChart.agentSymbol
                                                             }
-                                                        </span>
+                                                        </Link>
                                                         <span className="flex-shrink-0 text-gray-400">
+                                                            {mostSubmittedChart.chartCount.toLocaleString()}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        );
+                                    }
+                                )}
+                            </ul>
+                        </dd>
+                    </div>
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt className="text-sm font-medium leading-6 text-gray-900">
+                            Most Credits
+                        </dt>
+                        <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <ul
+                                role="list"
+                                className="divide-y divide-gray-100 rounded-md border border-gray-200"
+                            >
+                                {status.leaderboards.mostCredits.map(
+                                    (mostCredit, idx) => {
+                                        return (
+                                            <li
+                                                key={
+                                                    mostCredit.agentSymbol + idx
+                                                }
+                                                className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6"
+                                            >
+                                                <div className="flex w-0 flex-1 items-center">
+                                                    <div className="flex min-w-0 flex-1 gap-2">
+                                                        <Link
+                                                            preserveScroll
+                                                            className="truncate font-medium"
+                                                            href={route(
+                                                                "agents.show",
+                                                                mostCredit.agentSymbol
+                                                            )}
+                                                        >
                                                             {
-                                                                mostSubmittedChart.chartCount
+                                                                mostCredit.agentSymbol
                                                             }
+                                                        </Link>
+                                                        <span className="flex-shrink-0 text-gray-400">
+                                                            {mostCredit.credits.toLocaleString()}
                                                         </span>
                                                     </div>
                                                 </div>

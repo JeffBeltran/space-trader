@@ -1,13 +1,13 @@
+import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import { GetStatusResponse } from "@/types/space-traders-api";
-import { ServerStatus } from "@/Components/ServerStatus";
+import { AgentIndexProps } from "@/types/agent";
+import { Head, Link } from "@inertiajs/react";
 
-export default function Dashboard({
+export default function Index({
     auth,
-    gameStatus,
-}: PageProps<{ gameStatus: GetStatusResponse }>) {
+    listAgents,
+}: PageProps<AgentIndexProps>) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -17,13 +17,18 @@ export default function Dashboard({
                 </h2>
             }
         >
-            <Head title="Dashboard" />
+            <Head title="Agents" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white shadow-sm sm:rounded-lg">
+                    <div className="flex justify-end py-4">
+                        <Link href={route("agents.create")}>
+                            <PrimaryButton>Create Agent</PrimaryButton>
+                        </Link>
+                    </div>
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <ServerStatus status={gameStatus} />
+                            TODO: Build Agents Table
                         </div>
                     </div>
                 </div>
