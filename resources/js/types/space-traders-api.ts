@@ -14,13 +14,13 @@ export type GetStatusResponse = {
             {
                 agentSymbol: "string";
                 credits: number;
-            }
+            },
         ];
         mostSubmittedCharts: [
             {
                 agentSymbol: "string";
                 chartCount: number;
-            }
+            },
         ];
     };
     serverResets: {
@@ -31,12 +31,12 @@ export type GetStatusResponse = {
         {
             title: "string";
             body: "string";
-        }
+        },
     ];
     links: [
         {
             name: "string";
             url: "string";
-        }
+        },
     ];
 };

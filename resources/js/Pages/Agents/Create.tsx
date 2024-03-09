@@ -1,3 +1,5 @@
+import { Head, useForm } from "@inertiajs/react";
+
 import { Button } from "@/Components/catalyst/button";
 import {
     Description,
@@ -12,15 +14,15 @@ import { Input } from "@/Components/catalyst/input";
 import { Select } from "@/Components/catalyst/select";
 import { Text } from "@/Components/catalyst/text";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps } from "@/types";
-import { AgentCreateProps } from "@/types/agent";
-import { Head, useForm } from "@inertiajs/react";
+
+import type { PageProps } from "@/types";
+import type { AgentCreateProps } from "@/types/agent";
 
 export default function Create({
     auth,
     listFactions,
 }: PageProps<AgentCreateProps>) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         faction: "",
         symbol: "",
         email: "",
@@ -30,7 +32,7 @@ export default function Create({
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 className="text-xl font-semibold leading-tight text-gray-800">
                     Dashboard
                 </h2>
             }
@@ -38,8 +40,8 @@ export default function Create({
             <Head title="Agents" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <form
                                 onSubmit={(e) => {
@@ -62,7 +64,7 @@ export default function Create({
                                                 onChange={(e) => {
                                                     setData(
                                                         "faction",
-                                                        e.target.value
+                                                        e.target.value,
                                                     );
                                                 }}
                                                 invalid={!!errors.faction}
@@ -87,7 +89,7 @@ export default function Create({
                                                                 {faction.name}
                                                             </option>
                                                         );
-                                                    }
+                                                    },
                                                 )}
                                             </Select>
                                             {errors.faction && (
@@ -103,7 +105,7 @@ export default function Create({
                                                 onChange={(e) =>
                                                     setData(
                                                         "symbol",
-                                                        e.target.value
+                                                        e.target.value,
                                                     )
                                                 }
                                                 name="symbol"
@@ -126,7 +128,7 @@ export default function Create({
                                                 onChange={(e) =>
                                                     setData(
                                                         "email",
-                                                        e.target.value
+                                                        e.target.value,
                                                     )
                                                 }
                                                 name="email"

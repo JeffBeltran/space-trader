@@ -1,8 +1,9 @@
-import PrimaryButton from "@/Components/PrimaryButton";
+import { Head } from "@inertiajs/react";
+
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps } from "@/types";
-import { AgentIndexProps, AgentShowProps } from "@/types/agent";
-import { Head, Link } from "@inertiajs/react";
+
+import type { PageProps } from "@/types";
+import type { AgentShowProps } from "@/types/agent";
 
 export default function Show({
     auth,
@@ -12,7 +13,7 @@ export default function Show({
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 className="text-xl font-semibold leading-tight text-gray-800">
                     Agent Details
                 </h2>
             }
@@ -20,7 +21,7 @@ export default function Show({
             <Head title="Agents" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow sm:rounded-lg">
                         <div className="px-4 py-6 sm:px-6">
                             <h3 className="text-base font-semibold leading-7 text-gray-900">

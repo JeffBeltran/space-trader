@@ -1,8 +1,10 @@
+import { Head, Link } from "@inertiajs/react";
+
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps } from "@/types";
-import { AgentIndexProps } from "@/types/agent";
-import { Head, Link } from "@inertiajs/react";
+
+import type { PageProps } from "@/types";
+import type { AgentIndexProps } from "@/types/agent";
 
 export default function Index({
     auth,
@@ -12,7 +14,7 @@ export default function Index({
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 className="text-xl font-semibold leading-tight text-gray-800">
                     Dashboard
                 </h2>
             }
@@ -20,13 +22,13 @@ export default function Index({
             <Head title="Agents" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex justify-end py-4">
                         <Link href={route("agents.create")}>
                             <PrimaryButton>Create Agent</PrimaryButton>
                         </Link>
                     </div>
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             TODO: Build Agents Table
                         </div>

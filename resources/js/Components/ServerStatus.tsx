@@ -1,6 +1,8 @@
-import { GetStatusResponse } from "@/types/space-traders-api";
 import { DateTime } from "luxon";
+
 import { Link } from "./catalyst/link";
+
+import type { GetStatusResponse } from "@/types/space-traders-api";
 
 export function ServerStatus({ status }: { status: GetStatusResponse }) {
     return (
@@ -37,7 +39,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                         </dt>
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                             {DateTime.fromISO(
-                                status.serverResets.next
+                                status.serverResets.next,
                             ).toRelativeCalendar()}
                         </dd>
                     </div>
@@ -78,10 +80,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                             Most Submitted Charts
                         </dt>
                         <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            <ul
-                                role="list"
-                                className="divide-y divide-gray-100 rounded-md border border-gray-200"
-                            >
+                            <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
                                 {status.leaderboards.mostSubmittedCharts.map(
                                     (mostSubmittedChart, idx) => {
                                         return (
@@ -98,7 +97,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                                                             className="truncate font-medium"
                                                             href={route(
                                                                 "agents.show",
-                                                                mostSubmittedChart.agentSymbol
+                                                                mostSubmittedChart.agentSymbol,
                                                             )}
                                                         >
                                                             {
@@ -112,7 +111,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                                                 </div>
                                             </li>
                                         );
-                                    }
+                                    },
                                 )}
                             </ul>
                         </dd>
@@ -122,10 +121,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                             Most Credits
                         </dt>
                         <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            <ul
-                                role="list"
-                                className="divide-y divide-gray-100 rounded-md border border-gray-200"
-                            >
+                            <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
                                 {status.leaderboards.mostCredits.map(
                                     (mostCredit, idx) => {
                                         return (
@@ -142,7 +138,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                                                             className="truncate font-medium"
                                                             href={route(
                                                                 "agents.show",
-                                                                mostCredit.agentSymbol
+                                                                mostCredit.agentSymbol,
                                                             )}
                                                         >
                                                             {
@@ -156,7 +152,7 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                                                 </div>
                                             </li>
                                         );
-                                    }
+                                    },
                                 )}
                             </ul>
                         </dd>

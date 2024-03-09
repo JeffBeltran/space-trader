@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\UpdateAgentRequest;
 use App\Models\Agent;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
@@ -30,7 +31,7 @@ class AgentController extends Controller
     public function create()
     {
         $response = Http::get('https://api.spacetraders.io/v2/factions', [
-            'limit' => 20
+            'limit' => 20,
         ]);
 
         return Inertia::render('Agents/Create', [
@@ -60,7 +61,8 @@ class AgentController extends Controller
                 if ($key === 'agentSymbol') {
                     return ['symbol' => $errorMessage];
                 }
-                return $error[0];
+
+                return [$key => $error[0]];
             })->toArray();
 
             throw \Illuminate\Validation\ValidationException::withMessages($errors);
@@ -70,8 +72,12 @@ class AgentController extends Controller
         $agent->user_id = auth()->id();
         $agent->account_id = $response->json('data.agent.accountId');
         $agent->symbol = $response->json('data.agent.symbol');
-        $agent->token = $response->json('data.token');
+        $agent->token = Crypt::encryptString($response->json('data.token'));
         $agent->save();
+
+        $user = $request->user();
+        $user->active_agent_id = $agent->id;
+        $user->save();
 
         return redirect()->route('agents.show', ['agent' => $agent->symbol]);
     }
@@ -79,11 +85,21 @@ class AgentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($agentSymbol)
+    public function show($agentSymbol, Request $request)
     {
-        $response = Http::withUrlParameters([
-            'agentSymbol' => $agentSymbol,
-        ])->get("https://api.spacetraders.io/v2/agents/{agentSymbol}");
+
+        $agentToken = optional($request->user()->activeAgent)->token;
+
+        if ($agentToken) {
+            $response = Http::withToken(Crypt::decryptString($agentToken))
+                ->withUrlParameters([
+                    'agentSymbol' => $agentSymbol,
+                ])->get('https://api.spacetraders.io/v2/agents/{agentSymbol}');
+        } else {
+            $response = Http::withUrlParameters([
+                'agentSymbol' => $agentSymbol,
+            ])->get('https://api.spacetraders.io/v2/agents/{agentSymbol}');
+        }
 
         return Inertia::render('Agents/Show', [
             'agentDetails' => $response->json(),

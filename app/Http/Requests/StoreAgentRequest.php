@@ -23,7 +23,7 @@ class StoreAgentRequest extends FormRequest
     {
         return [
             'faction' => ['required', 'string'],
-            'symbol' => ['required', 'string', 'min:3', 'max:14'],
+            'symbol' => ['required', 'string', 'min:3', 'max:14', 'alpha_dash'],
             'email' => ['nullable', 'email'],
         ];
     }

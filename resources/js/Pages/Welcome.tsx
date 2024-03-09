@@ -1,5 +1,6 @@
 import { Link, Head } from "@inertiajs/react";
-import { PageProps } from "@/types";
+
+import type { PageProps } from "@/types";
 
 export default function Welcome({
     auth,
@@ -9,12 +10,12 @@ export default function Welcome({
     return (
         <>
             <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+            <div className="bg-dots-darker dark:bg-dots-lighter relative min-h-screen bg-gray-100 bg-center selection:bg-red-500 selection:text-white sm:flex sm:items-center sm:justify-center dark:bg-gray-900">
+                <div className="p-6 text-end sm:fixed sm:right-0 sm:top-0">
                     {auth.user ? (
                         <Link
                             href={route("dashboard")}
-                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            className="font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white"
                         >
                             Dashboard
                         </Link>
@@ -22,14 +23,14 @@ export default function Welcome({
                         <>
                             <Link
                                 href={route("login")}
-                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                className="font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white"
                             >
                                 Log in
                             </Link>
 
                             <Link
                                 href={route("register")}
-                                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white"
                             >
                                 Register
                             </Link>
@@ -37,7 +38,7 @@ export default function Welcome({
                     )}
                 </div>
 
-                <div className="max-w-7xl mx-auto p-6 lg:p-8 border border-red-500">
+                <div className="mx-auto max-w-7xl border border-red-500 p-6 lg:p-8">
                     <div className="flex justify-center">
                         <svg
                             viewBox="0 0 62 65"
@@ -53,19 +54,19 @@ export default function Welcome({
                     </div>
 
                     <div className="mt-16">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
                             <a
                                 href="https://laravel.com/docs"
-                                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
+                                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-red-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
                             >
                                 <div>
-                                    <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
+                                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 dark:bg-red-800/20">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             strokeWidth="1.5"
-                                            className="w-7 h-7 stroke-red-500"
+                                            className="h-7 w-7 stroke-red-500"
                                         >
                                             <path
                                                 strokeLinecap="round"
@@ -79,7 +80,7 @@ export default function Welcome({
                                         now it works?
                                     </h2>
 
-                                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                    <p className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                                         Laravel has wonderful documentation
                                         covering every aspect of the framework.
                                         Whether you are a newcomer or have prior
@@ -94,7 +95,7 @@ export default function Welcome({
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    className="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
+                                    className="mx-6 h-6 w-6 shrink-0 self-center stroke-red-500"
                                 >
                                     <path
                                         strokeLinecap="round"
@@ -106,16 +107,16 @@ export default function Welcome({
 
                             <a
                                 href="https://laracasts.com"
-                                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
+                                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-red-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
                             >
                                 <div>
-                                    <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
+                                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 dark:bg-red-800/20">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             strokeWidth="1.5"
-                                            className="w-7 h-7 stroke-red-500"
+                                            className="h-7 w-7 stroke-red-500"
                                         >
                                             <path
                                                 strokeLinecap="round"
@@ -128,7 +129,7 @@ export default function Welcome({
                                         Laracasts
                                     </h2>
 
-                                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                    <p className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                                         Laracasts offers thousands of video
                                         tutorials on Laravel, PHP, and
                                         JavaScript development. Check them out,
@@ -142,7 +143,7 @@ export default function Welcome({
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    className="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
+                                    className="mx-6 h-6 w-6 shrink-0 self-center stroke-red-500"
                                 >
                                     <path
                                         strokeLinecap="round"
@@ -154,16 +155,16 @@ export default function Welcome({
 
                             <a
                                 href="https://laravel-news.com"
-                                className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
+                                className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-red-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5"
                             >
                                 <div>
-                                    <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
+                                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 dark:bg-red-800/20">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             strokeWidth="1.5"
-                                            className="w-7 h-7 stroke-red-500"
+                                            className="h-7 w-7 stroke-red-500"
                                         >
                                             <path
                                                 strokeLinecap="round"
@@ -177,7 +178,7 @@ export default function Welcome({
                                         Laravel News
                                     </h2>
 
-                                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                    <p className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                                         Laravel News is a community driven
                                         portal and newsletter aggregating all of
                                         the latest and most important news in
@@ -191,7 +192,7 @@ export default function Welcome({
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    className="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
+                                    className="mx-6 h-6 w-6 shrink-0 self-center stroke-red-500"
                                 >
                                     <path
                                         strokeLinecap="round"
@@ -201,15 +202,15 @@ export default function Welcome({
                                 </svg>
                             </a>
 
-                            <div className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+                            <div className="duration-250 flex scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 transition-all focus:outline focus:outline-2 focus:outline-red-500 motion-safe:hover:scale-[1.01] dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5">
                                 <div>
-                                    <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
+                                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50 dark:bg-red-800/20">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             strokeWidth="1.5"
-                                            className="w-7 h-7 stroke-red-500"
+                                            className="h-7 w-7 stroke-red-500"
                                         >
                                             <path
                                                 strokeLinecap="round"
@@ -223,33 +224,33 @@ export default function Welcome({
                                         Vibrant Ecosystem
                                     </h2>
 
-                                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                    <p className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                                         Laravel's robust library of first-party
                                         tools and libraries, such as{" "}
                                         <a
                                             href="https://forge.laravel.com"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Forge
                                         </a>
                                         ,{" "}
                                         <a
                                             href="https://vapor.laravel.com"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Vapor
                                         </a>
                                         ,{" "}
                                         <a
                                             href="https://nova.laravel.com"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Nova
                                         </a>
                                         , and{" "}
                                         <a
                                             href="https://envoyer.io"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Envoyer
                                         </a>{" "}
@@ -258,42 +259,42 @@ export default function Welcome({
                                         source libraries like{" "}
                                         <a
                                             href="https://laravel.com/docs/billing"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Cashier
                                         </a>
                                         ,{" "}
                                         <a
                                             href="https://laravel.com/docs/dusk"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Dusk
                                         </a>
                                         ,{" "}
                                         <a
                                             href="https://laravel.com/docs/broadcasting"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Echo
                                         </a>
                                         ,{" "}
                                         <a
                                             href="https://laravel.com/docs/horizon"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Horizon
                                         </a>
                                         ,{" "}
                                         <a
                                             href="https://laravel.com/docs/sanctum"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Sanctum
                                         </a>
                                         ,{" "}
                                         <a
                                             href="https://laravel.com/docs/telescope"
-                                            className="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                            className="underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white"
                                         >
                                             Telescope
                                         </a>
@@ -304,12 +305,12 @@ export default function Welcome({
                         </div>
                     </div>
 
-                    <div className="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
+                    <div className="mt-16 flex justify-center px-6 sm:items-center sm:justify-between">
                         <div className="text-center text-sm sm:text-start">
                             &nbsp;
                         </div>
 
-                        <div className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0">
+                        <div className="text-center text-sm text-gray-500 sm:ms-0 sm:text-end dark:text-gray-400">
                             Laravel v{laravelVersion} (PHP v{phpVersion})
                         </div>
                     </div>

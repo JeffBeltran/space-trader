@@ -28,7 +28,7 @@ export type AgentCreateProps = {
                     symbol: string;
                     name: string;
                     description: string;
-                }
+                },
             ];
             isRecruiting: boolean;
         }>;
