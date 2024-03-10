@@ -40,3 +40,12 @@ export type GetStatusResponse = {
         },
     ];
 };
+
+export type SpaceTraderPaginationResponse<T> = {
+    data: Array<T>;
+    meta: {
+        total: number;
+        page: number;
+        limit: number;
+    };
+};

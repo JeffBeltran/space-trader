@@ -80,40 +80,45 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                             Most Submitted Charts
                         </dt>
                         <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                            <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
-                                {status.leaderboards.mostSubmittedCharts.map(
-                                    (mostSubmittedChart, idx) => {
-                                        return (
-                                            <li
-                                                key={
-                                                    mostSubmittedChart.agentSymbol +
-                                                    idx
-                                                }
-                                                className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6"
-                                            >
-                                                <div className="flex w-0 flex-1 items-center">
-                                                    <div className="flex min-w-0 flex-1 gap-2">
-                                                        <Link
-                                                            className="truncate font-medium"
-                                                            href={route(
-                                                                "agents.show",
-                                                                mostSubmittedChart.agentSymbol,
-                                                            )}
-                                                        >
-                                                            {
-                                                                mostSubmittedChart.agentSymbol
-                                                            }
-                                                        </Link>
-                                                        <span className="flex-shrink-0 text-gray-400">
-                                                            {mostSubmittedChart.chartCount.toLocaleString()}
-                                                        </span>
+                            {status.leaderboards.mostSubmittedCharts.length >
+                            0 ? (
+                                <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
+                                    {status.leaderboards.mostSubmittedCharts.map(
+                                        (mostSubmittedChart, idx) => {
+                                            return (
+                                                <li
+                                                    key={
+                                                        mostSubmittedChart.agentSymbol +
+                                                        idx
+                                                    }
+                                                    className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6"
+                                                >
+                                                    <div className="flex w-0 flex-1 items-center">
+                                                        <div className="flex min-w-0 flex-1 gap-2">
+                                                            <Link
+                                                                className="truncate font-medium"
+                                                                href={route(
+                                                                    "agents.show",
+                                                                    mostSubmittedChart.agentSymbol,
+                                                                )}
+                                                            >
+                                                                {
+                                                                    mostSubmittedChart.agentSymbol
+                                                                }
+                                                            </Link>
+                                                            <span className="flex-shrink-0 text-gray-400">
+                                                                {mostSubmittedChart.chartCount.toLocaleString()}
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        );
-                                    },
-                                )}
-                            </ul>
+                                                </li>
+                                            );
+                                        },
+                                    )}
+                                </ul>
+                            ) : (
+                                <NoData />
+                            )}
                         </dd>
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -159,6 +164,16 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                     </div>
                 </dl>
             </div>
+        </div>
+    );
+}
+
+function NoData() {
+    return (
+        <div className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-6 text-center">
+            <span className="mt-2 block text-sm font-semibold text-gray-700">
+                No Data
+            </span>
         </div>
     );
 }

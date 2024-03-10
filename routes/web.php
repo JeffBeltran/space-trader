@@ -5,6 +5,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShipController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,13 +43,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('agents', AgentController::class)->only([
         'index', 'create', 'store', 'show',
     ]);
-
     Route::resource('contracts', ContractController::class)->only([
         'index',
     ]);
-
     Route::resource('accepted-contracts', AcceptedContractController::class)->only([
         'store',
+    ]);
+    Route::resource('ships', ShipController::class)->only([
+        'index', 'show',
     ]);
 });
 

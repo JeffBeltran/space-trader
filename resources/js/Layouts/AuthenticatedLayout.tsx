@@ -43,6 +43,12 @@ export default function AuthenticatedLayout({
                                     Contracts
                                 </NavLink>
                                 <NavLink
+                                    href={route("ships.index")}
+                                    active={route().current("ships.*")}
+                                >
+                                    Ships
+                                </NavLink>
+                                <NavLink
                                     href={route("agents.index")}
                                     active={route().current("agents.*")}
                                 >
