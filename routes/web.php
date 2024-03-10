@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AcceptedContractController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -38,8 +40,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('agents', AgentController::class)->only([
-        'index', 'create', 'store', 'show'
+        'index', 'create', 'store', 'show',
+    ]);
+
+    Route::resource('contracts', ContractController::class)->only([
+        'index',
+    ]);
+
+    Route::resource('accepted-contracts', AcceptedContractController::class)->only([
+        'store',
     ]);
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
