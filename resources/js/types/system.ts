@@ -16,25 +16,25 @@ type Waypoint =
     | "ARTIFICIAL_GRAVITY_WELL"
     | "FUEL_STATION";
 
-type SystemWaypoint = {
+export type SystemWaypoint = {
     symbol: string;
     type: Waypoint;
-    x: 0;
-    y: 0;
+    x: number;
+    y: number;
     orbitals: [
         {
             symbol: string;
         },
     ];
-    orbits: string;
+    orbits?: string;
 };
 
 type System = {
     symbol: string;
     sectorSymbol: string;
     type: string;
-    x: 0;
-    y: 0;
+    x: number;
+    y: number;
     waypoints: Array<SystemWaypoint>;
     factions: [
         {
