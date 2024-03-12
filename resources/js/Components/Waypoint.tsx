@@ -1,6 +1,12 @@
+import clsx from "clsx";
+
+import { useWaypointColors } from "@/hooks/useWaypointColors";
+
 import type { SystemWaypoint } from "@/types/system";
 
 export function Waypoint({ waypoint }: { waypoint: SystemWaypoint }) {
+    const { textClass } = useWaypointColors(waypoint.type);
+
     return (
         <g>
             <circle
@@ -8,7 +14,7 @@ export function Waypoint({ waypoint }: { waypoint: SystemWaypoint }) {
                 cx={waypoint.x}
                 cy={waypoint.y}
                 r={2}
-                className="fill-current text-blue-500"
+                className={clsx("fill-current", textClass)}
             />
             {waypoint.orbitals.length && (
                 <circle

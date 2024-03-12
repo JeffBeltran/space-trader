@@ -1,6 +1,18 @@
 import type { SpaceTraderPaginationResponse } from "./space-traders-api";
 
-type Waypoint =
+export type SystemType =
+    | "NEUTRON_STAR"
+    | "RED_STAR"
+    | "ORANGE_STAR"
+    | "BLUE_STAR"
+    | "YOUNG_STAR"
+    | "WHITE_DWARF"
+    | "BLACK_HOLE"
+    | "HYPERGIANT"
+    | "NEBULA"
+    | "UNSTABLE";
+
+export type WaypointType =
     | "PLANET"
     | "GAS_GIANT"
     | "MOON"
@@ -18,7 +30,7 @@ type Waypoint =
 
 export type SystemWaypoint = {
     symbol: string;
-    type: Waypoint;
+    type: WaypointType;
     x: number;
     y: number;
     orbitals: [
@@ -29,10 +41,10 @@ export type SystemWaypoint = {
     orbits?: string;
 };
 
-type System = {
+export type System = {
     symbol: string;
     sectorSymbol: string;
-    type: string;
+    type: SystemType;
     x: number;
     y: number;
     waypoints: Array<SystemWaypoint>;

@@ -1,9 +1,15 @@
+import clsx from "clsx";
+
+import { useSystemColors } from "@/hooks/useSystemColors";
+
 import { Waypoint } from "./Waypoint";
 
-import type { SystemWaypoint } from "@/types/system";
+import type { System } from "@/types/system";
 
-export function SystemMap({ waypoints }: { waypoints: Array<SystemWaypoint> }) {
-    const data = waypoints.filter((waypoint) => {
+export function SystemMap({ system }: { system: System }) {
+    const { textClass } = useSystemColors(system.type);
+
+    const data = system.waypoints.filter((waypoint) => {
         return waypoint.type !== "ASTEROID" && waypoint.orbits === undefined;
     });
 
@@ -39,7 +45,7 @@ export function SystemMap({ waypoints }: { waypoints: Array<SystemWaypoint> }) {
     ];
 
     return (
-        <div className="w-1/2">
+        <div className="w-full">
             <svg
                 className="h-full w-full"
                 width={canvasSquare}
@@ -68,7 +74,7 @@ export function SystemMap({ waypoints }: { waypoints: Array<SystemWaypoint> }) {
                     cx={canvasSquare / 2}
                     cy={canvasSquare / 2}
                     r={4}
-                    className="fill-current text-yellow-500"
+                    className={clsx("fill-current", textClass)}
                 />
                 {mappedData.map((item) => (
                     <Waypoint key={item.symbol} waypoint={item} />
