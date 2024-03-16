@@ -2,6 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Head } from "@inertiajs/react";
 import clsx from "clsx";
 
+import { Button } from "@/Components/catalyst/button";
 import { Link } from "@/Components/catalyst/link";
 import { WaypointDetailsCard } from "@/Components/WaypointDetailsCard";
 import { useWaypointColors } from "@/hooks/useWaypointColors";
@@ -19,6 +20,14 @@ export default function Show({
     console.log(systemDetails);
 
     const { textClass } = useWaypointColors(waypointDetails.data.type);
+
+    const hasShipyard = waypointDetails.data.traits.some(
+        (trait) => trait.symbol === "SHIPYARD",
+    );
+
+    const hasMarket = waypointDetails.data.traits.some(
+        (trait) => trait.symbol === "MARKETPLACE",
+    );
 
     return (
         <AuthenticatedLayout
@@ -90,19 +99,55 @@ export default function Show({
                                 </span>
                             </h2>
                         </div>
+                        <div className="mt-4 flex gap-x-3 md:ml-4 md:mt-0">
+                            <Button type="button" disabled={!hasShipyard}>
+                                View Shipyard
+                            </Button>
+
+                            <Button type="button" disabled={!hasMarket}>
+                                View Market
+                            </Button>
+                        </div>
                     </div>
                 </div>
             }
         >
             <Head title={`${waypointDetails.data.symbol} System`} />
 
-            <main className="mt-8">
+            <main className="py-8">
                 <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
                         <div className="grid grid-cols-1 gap-4 lg:col-span-2">
                             <section aria-labelledby="section-1-title">
-                                <div className="overflow-hidden rounded-lg bg-white shadow">
-                                    data
+                                <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+                                    <div className="px-4 py-6 sm:px-6">
+                                        <h3 className="text-base font-semibold leading-7 text-gray-900">
+                                            Waypoint Traits
+                                        </h3>
+                                    </div>
+                                    <div className="border-t border-gray-100">
+                                        <dl className="divide-y divide-gray-100">
+                                            {waypointDetails.data.traits.map(
+                                                (trait) => {
+                                                    return (
+                                                        <div
+                                                            key={trait.symbol}
+                                                            className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                                        >
+                                                            <dt className="text-sm font-medium text-gray-900">
+                                                                {trait.name}
+                                                            </dt>
+                                                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                                                {
+                                                                    trait.description
+                                                                }
+                                                            </dd>
+                                                        </div>
+                                                    );
+                                                },
+                                            )}
+                                        </dl>
+                                    </div>
                                 </div>
                             </section>
                         </div>
