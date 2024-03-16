@@ -22,14 +22,3 @@ export type Contract = {
     expiration: string;
     deadlineToAccept: string;
 };
-
-export type ContractIndexProps = {
-    listContracts: {
-        data: Array<Contract>;
-        meta: {
-            total: number;
-            page: number;
-            limit: number;
-        };
-    };
-};

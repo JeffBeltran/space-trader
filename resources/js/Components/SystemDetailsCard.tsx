@@ -4,7 +4,7 @@ import { useSystemColors } from "@/hooks/useSystemColors";
 
 import { SystemMap } from "./SystemMap";
 
-import type { System } from "@/types/system";
+import type { System } from "@/types/space-traders-api/system";
 
 export function SystemDetailsCard({ system }: { system: System }) {
     const { textClass } = useSystemColors(system.type);

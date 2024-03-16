@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShipController;
 use App\Http\Controllers\SystemController;
+use App\Http\Controllers\WaypointController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -55,6 +56,9 @@ Route::middleware('auth')->group(function () {
     ]);
     Route::resource('systems', SystemController::class)->only([
         'index', 'show',
+    ]);
+    Route::resource('systems.waypoints', WaypointController::class)->only([
+        'show',
     ]);
 });
 

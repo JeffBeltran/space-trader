@@ -1,4 +1,4 @@
-import type { ShipNavStatus } from "@/types/ships";
+import type { ShipNavStatus } from "@/types/space-traders-api/ship";
 
 type ColorInfo = {
     hex: string;

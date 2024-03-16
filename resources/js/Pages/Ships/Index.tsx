@@ -5,7 +5,7 @@ import { ShipCard } from "@/Components/ShipCard";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
-import type { ShipIndexProps } from "@/types/ships";
+import type { ShipIndexProps } from "@/types/pages/ship";
 
 export default function Index({ auth, listShips }: PageProps<ShipIndexProps>) {
     console.log(listShips);

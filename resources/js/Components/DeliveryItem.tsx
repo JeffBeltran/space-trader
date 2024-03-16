@@ -1,4 +1,4 @@
-import type { ContractDelivery } from "@/types/contract";
+import type { ContractDelivery } from "@/types/space-traders-api/contract";
 
 export function DeliveryItem({
     deliveryItem,

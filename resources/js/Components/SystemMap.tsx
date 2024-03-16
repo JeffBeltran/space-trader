@@ -4,7 +4,7 @@ import { useSystemColors } from "@/hooks/useSystemColors";
 
 import { Waypoint } from "./Waypoint";
 
-import type { System } from "@/types/system";
+import type { System } from "@/types/space-traders-api/system";
 
 export function SystemMap({ system }: { system: System }) {
     const { textClass } = useSystemColors(system.type);

@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import { useWaypointColors } from "@/hooks/useWaypointColors";
 
-import type { SystemWaypoint } from "@/types/system";
+import type { SystemWaypoint } from "@/types/space-traders-api/system";
 
 export function Waypoint({ waypoint }: { waypoint: SystemWaypoint }) {
     const { textClass } = useWaypointColors(waypoint.type);

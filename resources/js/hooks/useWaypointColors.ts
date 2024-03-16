@@ -1,4 +1,4 @@
-import type { WaypointType } from "@/types/system";
+import type { WaypointType } from "@/types/space-traders-api/waypoint";
 
 type TailwindPalette =
     | "slate"

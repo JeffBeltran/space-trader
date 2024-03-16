@@ -8,38 +8,14 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
-class DashboardController extends Controller
+class WaypointController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        $agentToken = optional($request->user()->activeAgent)->token;
-
-        if (! $agentToken) {
-            $publicResponse = Http::get('https://api.spacetraders.io/v2/');
-
-            return Inertia::render('Dashboard', [
-                'gameStatus' => $publicResponse->json(),
-                'agentData' => null,
-            ]);
-        }
-
-        $responses = Http::pool(fn (Pool $pool) => [
-            $pool
-                ->withToken(Crypt::decryptString($agentToken))
-                ->get('https://api.spacetraders.io/v2/'),
-            $pool
-                ->withToken(Crypt::decryptString($agentToken))
-                ->get('https://api.spacetraders.io/v2/my/agent'),
-        ]);
-
-        return Inertia::render('Dashboard', [
-            'gameStatus' => $responses[0]->json(),
-            'agentData' => $responses[1]->json('data'),
-        ]);
+        //
     }
 
     /**
@@ -61,9 +37,22 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $system, string $waypoint, Request $request)
     {
-        //
+        $agentToken = optional($request->user()->activeAgent)->token;
+
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool
+                ->withToken(Crypt::decryptString($agentToken))->withUrlParameters([
+                    'systemSymbol' => $system,
+                    'waypointSymbol' => $waypoint,
+                ])
+                ->get('https://api.spacetraders.io/v2/systems/{systemSymbol}/waypoints/{waypointSymbol}'),
+        ]);
+
+        return Inertia::render('Waypoints/Show', [
+            'waypointDetails' => $responses[0]->json(),
+        ]);
     }
 
     /**

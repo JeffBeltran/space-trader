@@ -7,7 +7,7 @@ import { useShipStatusColors } from "@/hooks/useShipStatusColors";
 import { Badge } from "./catalyst/badge";
 import { Link } from "./catalyst/link";
 
-import type { ShipDetails } from "@/types/ships";
+import type { ShipDetails } from "@/types/space-traders-api/ship";
 
 export function ShipCard({ shipDetails }: { shipDetails: ShipDetails }) {
     const avatar = useShipAvatar(

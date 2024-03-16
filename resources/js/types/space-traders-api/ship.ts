@@ -1,5 +1,3 @@
-import type { SpaceTraderPaginationResponse } from "./space-traders-api";
-
 export type ShipNavStatus = "IN_TRANSIT" | "DOCKED" | "IN_ORBIT";
 
 type ShipNavFlightMode = "CRUISE" | "DRIFT" | "STEALTH" | "BURN";
@@ -153,8 +151,4 @@ export type ShipDetails = {
             timestamp: string;
         };
     };
-};
-
-export type ShipIndexProps = {
-    listShips: SpaceTraderPaginationResponse<ShipDetails>;
 };

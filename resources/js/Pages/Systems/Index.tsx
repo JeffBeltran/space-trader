@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
-import type { SystemIndexProps } from "@/types/system";
+import type { SystemIndexProps } from "@/types/pages/system";
 
 export default function Index({
     auth,

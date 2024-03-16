@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
-import type { AgentShowProps } from "@/types/agent";
+import type { AgentShowProps } from "@/types/pages/agent";
 
 export default function Show({
     auth,

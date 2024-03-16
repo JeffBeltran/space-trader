@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 import { useShipRoleColors } from "./useShipRoleColors";
 
-import type { ShipRole } from "@/types/ships";
+import type { ShipRole } from "@/types/space-traders-api/ship";
 
 export function useShipAvatar(role: ShipRole, name?: string) {
     const { rgb } = useShipRoleColors(role);

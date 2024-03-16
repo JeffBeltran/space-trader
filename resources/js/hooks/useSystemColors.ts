@@ -1,4 +1,4 @@
-import type { SystemType } from "@/types/system";
+import type { SystemType } from "@/types/space-traders-api/system";
 
 type TailwindPalette =
     | "slate"

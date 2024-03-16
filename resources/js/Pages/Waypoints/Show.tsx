@@ -1,23 +1,20 @@
-import { ChevronLeftIcon } from "@heroicons/react/20/solid";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Head } from "@inertiajs/react";
 import clsx from "clsx";
 
 import { Link } from "@/Components/catalyst/link";
-import { SystemDetailsCard } from "@/Components/SystemDetailsCard";
-import { WaypointListItem } from "@/Components/WaypointListItem";
-import { useSystemColors } from "@/hooks/useSystemColors";
+import { useWaypointColors } from "@/hooks/useWaypointColors";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
-import type { SystemShowProps } from "@/types/pages/system";
+import type { WaypointShowProps } from "@/types/pages/waypoint";
 
-export default function Index({
+export default function Show({
     auth,
-    waypoints,
-    systemMap,
-}: PageProps<SystemShowProps>) {
-    const { textClass } = useSystemColors(systemMap.type);
-    console.log(waypoints);
+    waypointDetails,
+}: PageProps<WaypointShowProps>) {
+    const { textClass } = useWaypointColors(waypointDetails.data.type);
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -26,14 +23,17 @@ export default function Index({
                     <div>
                         <nav className="sm:hidden" aria-label="Back">
                             <Link
-                                href={route("dashboard")}
+                                href={route(
+                                    "systems.show",
+                                    waypointDetails.data.systemSymbol,
+                                )}
                                 className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
                             >
                                 <ChevronLeftIcon
                                     className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
                                     aria-hidden="true"
                                 />
-                                Dashboard
+                                System
                             </Link>
                         </nav>
                         <nav className="hidden sm:flex" aria-label="Breadcrumb">
@@ -45,6 +45,24 @@ export default function Index({
                                             className="text-sm font-medium text-gray-500 hover:text-gray-700"
                                         >
                                             Systems
+                                        </Link>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="flex items-center">
+                                        <ChevronRightIcon
+                                            className="h-5 w-5 flex-shrink-0 text-gray-400"
+                                            aria-hidden="true"
+                                        />
+                                        <Link
+                                            href={route(
+                                                "systems.show",
+                                                waypointDetails.data
+                                                    .systemSymbol,
+                                            )}
+                                            className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                                        >
+                                            {waypointDetails.data.systemSymbol}
                                         </Link>
                                     </div>
                                 </li>
@@ -60,10 +78,10 @@ export default function Index({
                                         textClass,
                                     )}
                                 >
-                                    {systemMap.type}
+                                    {waypointDetails.data.type}
                                 </span>
                                 <span className="font-mono">
-                                    {systemMap.symbol}
+                                    {waypointDetails.data.symbol}
                                 </span>
                             </h2>
                         </div>
@@ -71,7 +89,7 @@ export default function Index({
                 </div>
             }
         >
-            <Head title={`${systemMap.symbol} System`} />
+            <Head title={`${waypointDetails.data.symbol} System`} />
 
             <main className="mt-8">
                 <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -79,16 +97,7 @@ export default function Index({
                         <div className="grid grid-cols-1 gap-4 lg:col-span-2">
                             <section aria-labelledby="section-1-title">
                                 <div className="overflow-hidden rounded-lg bg-white shadow">
-                                    <ul className="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl">
-                                        {waypoints.data.map((waypoint) => {
-                                            return (
-                                                <WaypointListItem
-                                                    key={waypoint.symbol}
-                                                    waypoint={waypoint}
-                                                />
-                                            );
-                                        })}
-                                    </ul>
+                                    data
                                 </div>
                             </section>
                         </div>
@@ -96,7 +105,7 @@ export default function Index({
                         <div className="grid grid-cols-1 gap-4">
                             <section aria-labelledby="section-2-title">
                                 <div className="overflow-hidden rounded-lg bg-white shadow">
-                                    <SystemDetailsCard system={systemMap} />
+                                    data
                                 </div>
                             </section>
                         </div>

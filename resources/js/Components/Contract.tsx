@@ -5,7 +5,7 @@ import { Badge } from "./catalyst/badge";
 import { Button } from "./catalyst/button";
 import { DeliveryItem } from "./DeliveryItem";
 
-import type { Contract } from "@/types/contract";
+import type { Contract } from "@/types/space-traders-api/contract";
 
 export function Contract({ contract }: { contract: Contract }) {
     const { post, processing } = useForm({

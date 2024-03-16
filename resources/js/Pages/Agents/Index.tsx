@@ -4,7 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
-import type { AgentIndexProps } from "@/types/agent";
+import type { AgentIndexProps } from "@/types/space-traders-api/agent";
 
 export default function Index({
     auth,

@@ -4,7 +4,7 @@ import { Contract } from "@/Components/Contract";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
-import type { ContractIndexProps } from "@/types/contract";
+import type { ContractIndexProps } from "@/types/pages/contract";
 
 export default function Index({
     auth,

@@ -1,4 +1,4 @@
-import type { SpaceTraderPaginationResponse } from "./space-traders-api";
+import type { WaypointType } from "./waypoint";
 
 export type SystemType =
     | "NEUTRON_STAR"
@@ -11,22 +11,6 @@ export type SystemType =
     | "HYPERGIANT"
     | "NEBULA"
     | "UNSTABLE";
-
-export type WaypointType =
-    | "PLANET"
-    | "GAS_GIANT"
-    | "MOON"
-    | "ORBITAL_STATION"
-    | "JUMP_GATE"
-    | "ASTEROID_FIELD"
-    | "ASTEROID"
-    | "ENGINEERED_ASTEROID"
-    | "ASTEROID_BASE"
-    | "NEBULA"
-    | "DEBRIS_FIELD"
-    | "GRAVITY_WELL"
-    | "ARTIFICIAL_GRAVITY_WELL"
-    | "FUEL_STATION";
 
 export type SystemWaypoint = {
     symbol: string;
@@ -53,11 +37,4 @@ export type System = {
             symbol: string;
         },
     ];
-};
-
-export type SystemIndexProps = {
-    listSystems: SpaceTraderPaginationResponse<System>;
-};
-export type SystemShowProps = {
-    systemDetails: System;
 };

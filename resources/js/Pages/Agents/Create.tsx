@@ -16,7 +16,7 @@ import { Text } from "@/Components/catalyst/text";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
-import type { AgentCreateProps } from "@/types/agent";
+import type { AgentCreateProps } from "@/types/pages/agent";
 
 export default function Create({
     auth,

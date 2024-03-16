@@ -1,4 +1,4 @@
-import type { ShipRole } from "@/types/ships";
+import type { ShipRole } from "@/types/space-traders-api/ship";
 
 type TailwindPalette =
     | "lime"

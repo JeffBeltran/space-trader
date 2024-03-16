@@ -49,3 +49,7 @@ export type SpaceTraderPaginationResponse<T> = {
         limit: number;
     };
 };
+
+export type SpaceTraderResponse<T> = {
+    data: T;
+};
