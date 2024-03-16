@@ -1,5 +1,6 @@
 import { Head } from "@inertiajs/react";
 
+import { Link } from "@/Components/catalyst/link";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
@@ -9,6 +10,8 @@ export default function Show({
     auth,
     agentDetails,
 }: PageProps<AgentShowProps>) {
+    const [sector, system] = agentDetails.data.headquarters.split("-");
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -54,7 +57,18 @@ export default function Show({
                                         Headquarters
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {agentDetails.data.headquarters}
+                                        <Link
+                                            href={route(
+                                                "systems.waypoints.show",
+                                                [
+                                                    `${sector}-${system}`,
+                                                    agentDetails.data
+                                                        .headquarters,
+                                                ],
+                                            )}
+                                        >
+                                            {agentDetails.data.headquarters}
+                                        </Link>
                                     </dd>
                                 </div>
                                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

@@ -60,7 +60,7 @@ class SystemController extends Controller
                 ->withUrlParameters([
                     'systemSymbol' => $systemSymbol,
                 ])->withQueryParameters([
-                    'traits' => ['MARKETPLACE'],
+                    'traits' => ['SHIPYARD'],
                     'page' => $request->query('page'),
                     'limit' => 7,
                 ])->get('https://api.spacetraders.io/v2/systems/{systemSymbol}/waypoints'),
