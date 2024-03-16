@@ -48,10 +48,16 @@ class WaypointController extends Controller
                     'waypointSymbol' => $waypoint,
                 ])
                 ->get('https://api.spacetraders.io/v2/systems/{systemSymbol}/waypoints/{waypointSymbol}'),
+            $pool
+                ->withToken(Crypt::decryptString($agentToken))
+                ->withUrlParameters([
+                    'systemSymbol' => $system,
+                ])->get('https://api.spacetraders.io/v2/systems/{systemSymbol}'),
         ]);
 
         return Inertia::render('Waypoints/Show', [
             'waypointDetails' => $responses[0]->json(),
+            'systemDetails' => $responses[1]->json(),
         ]);
     }
 

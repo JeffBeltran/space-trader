@@ -1,39 +1,7 @@
 import type { SystemType } from "@/types/space-traders-api/system";
+import type { ColorInfo } from "@/types/utils";
 
-type TailwindPalette =
-    | "slate"
-    | "gray"
-    | "zinc"
-    | "neutral"
-    | "stone"
-    | "red"
-    | "orange"
-    | "amber"
-    | "yellow"
-    | "lime"
-    | "green"
-    | "emerald"
-    | "teal"
-    | "cyan"
-    | "sky"
-    | "blue"
-    | "indigo"
-    | "violet"
-    | "purple"
-    | "fuchsia"
-    | "pink"
-    | "rose";
-
-type ColorInfo = {
-    hex: string;
-    rgb: string;
-    textClass: string;
-    bgClass: string;
-    semanticName: string;
-    tailwindPalette: TailwindPalette;
-};
-
-const systemTypeColorMap: Record<SystemType, ColorInfo> = {
+export const systemTypeColorMap: Record<SystemType, ColorInfo> = {
     // Stars
     NEUTRON_STAR: {
         hex: "#60a5fa",
@@ -81,7 +49,7 @@ const systemTypeColorMap: Record<SystemType, ColorInfo> = {
         textClass: "text-gray-200",
         bgClass: "bg-gray-200",
         semanticName: "whiteDwarf",
-        tailwindPalette: "gray",
+        tailwindPalette: "zinc",
     },
 
     // Black Hole and Hypergiant
@@ -91,7 +59,7 @@ const systemTypeColorMap: Record<SystemType, ColorInfo> = {
         textClass: "text-gray-800",
         bgClass: "bg-gray-800",
         semanticName: "blackHole",
-        tailwindPalette: "gray",
+        tailwindPalette: "zinc",
     },
     HYPERGIANT: {
         hex: "#fbbf24",

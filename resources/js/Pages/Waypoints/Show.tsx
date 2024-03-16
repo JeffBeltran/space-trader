@@ -3,6 +3,7 @@ import { Head } from "@inertiajs/react";
 import clsx from "clsx";
 
 import { Link } from "@/Components/catalyst/link";
+import { WaypointDetailsCard } from "@/Components/WaypointDetailsCard";
 import { useWaypointColors } from "@/hooks/useWaypointColors";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
@@ -12,7 +13,11 @@ import type { WaypointShowProps } from "@/types/pages/waypoint";
 export default function Show({
     auth,
     waypointDetails,
+    systemDetails,
 }: PageProps<WaypointShowProps>) {
+    console.log(waypointDetails);
+    console.log(systemDetails);
+
     const { textClass } = useWaypointColors(waypointDetails.data.type);
 
     return (
@@ -105,7 +110,10 @@ export default function Show({
                         <div className="grid grid-cols-1 gap-4">
                             <section aria-labelledby="section-2-title">
                                 <div className="overflow-hidden rounded-lg bg-white shadow">
-                                    data
+                                    <WaypointDetailsCard
+                                        system={systemDetails.data}
+                                        waypoint={waypointDetails.data}
+                                    />
                                 </div>
                             </section>
                         </div>

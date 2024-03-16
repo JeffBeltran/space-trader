@@ -1,39 +1,7 @@
 import type { WaypointType } from "@/types/space-traders-api/waypoint";
+import type { ColorInfo } from "@/types/utils";
 
-type TailwindPalette =
-    | "slate"
-    | "gray"
-    | "zinc"
-    | "neutral"
-    | "stone"
-    | "red"
-    | "orange"
-    | "amber"
-    | "yellow"
-    | "lime"
-    | "green"
-    | "emerald"
-    | "teal"
-    | "cyan"
-    | "sky"
-    | "blue"
-    | "indigo"
-    | "violet"
-    | "purple"
-    | "fuchsia"
-    | "pink"
-    | "rose";
-
-type ColorInfo = {
-    hex: string;
-    rgb: string;
-    textClass: string;
-    bgClass: string;
-    semanticName: string;
-    tailwindPalette: TailwindPalette;
-};
-
-const waypointColorMap: Record<WaypointType, ColorInfo> = {
+export const waypointColorMap: Record<WaypointType, ColorInfo> = {
     // Celestial Bodies
     PLANET: {
         hex: "#22c55e",
@@ -54,10 +22,10 @@ const waypointColorMap: Record<WaypointType, ColorInfo> = {
     MOON: {
         hex: "#64748b",
         rgb: "64748b",
-        textClass: "text-slate-500",
-        bgClass: "bg-slate-500",
+        textClass: "text-zinc-500",
+        bgClass: "bg-zinc-500",
         semanticName: "moon",
-        tailwindPalette: "slate",
+        tailwindPalette: "zinc",
     },
 
     // Stations and Structures

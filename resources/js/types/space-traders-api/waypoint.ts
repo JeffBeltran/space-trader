@@ -106,18 +106,18 @@ type WaypointTrait = {
     description: string;
 };
 
+export type WaypointOrbital = {
+    symbol: string;
+};
+
 export type Waypoint = {
     symbol: string;
     type: WaypointType;
     systemSymbol: string;
     x: number;
     y: number;
-    orbitals: [
-        {
-            symbol: string;
-        },
-    ];
-    orbits: string;
+    orbitals: Array<WaypointOrbital>;
+    orbits?: string;
     faction: {
         symbol: FactionSymbol;
     };
