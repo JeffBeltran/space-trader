@@ -1,6 +1,6 @@
-import { Head, Link } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 
-import PrimaryButton from "@/Components/PrimaryButton";
+import { Button } from "@/Components/catalyst/button";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
@@ -24,9 +24,9 @@ export default function Index({
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex justify-end py-4">
-                        <Link href={route("agents.create")}>
-                            <PrimaryButton>Create Agent</PrimaryButton>
-                        </Link>
+                        <Button href={route("agents.create")}>
+                            Create Agent
+                        </Button>
                     </div>
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">

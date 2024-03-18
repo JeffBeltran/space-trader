@@ -17,7 +17,6 @@ export default function Show({
     systemDetails,
 }: PageProps<WaypointShowProps>) {
     console.log(waypointDetails);
-    console.log(systemDetails);
 
     const { textClass } = useWaypointColors(waypointDetails.data.type);
 
@@ -100,13 +99,37 @@ export default function Show({
                             </h2>
                         </div>
                         <div className="mt-4 flex gap-x-3 md:ml-4 md:mt-0">
-                            <Button type="button" disabled={!hasShipyard}>
-                                View Shipyard
-                            </Button>
+                            {hasShipyard ? (
+                                <Button
+                                    href={route(
+                                        "systems.waypoints.shipyard.index",
+                                        [
+                                            waypointDetails.data.systemSymbol,
+                                            waypointDetails.data.symbol,
+                                        ],
+                                    )}
+                                >
+                                    View Shipyard
+                                </Button>
+                            ) : (
+                                <Button disabled>View Shipyard</Button>
+                            )}
 
-                            <Button type="button" disabled={!hasMarket}>
-                                View Market
-                            </Button>
+                            {hasMarket ? (
+                                <Button
+                                    href={route(
+                                        "systems.waypoints.shipyard.index",
+                                        [
+                                            waypointDetails.data.systemSymbol,
+                                            waypointDetails.data.symbol,
+                                        ],
+                                    )}
+                                >
+                                    View Market
+                                </Button>
+                            ) : (
+                                <Button disabled>View Market</Button>
+                            )}
                         </div>
                     </div>
                 </div>

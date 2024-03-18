@@ -6,6 +6,7 @@ use App\Http\Controllers\ContractController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShipController;
+use App\Http\Controllers\ShipyardController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\WaypointController;
 use Illuminate\Foundation\Application;
@@ -52,13 +53,16 @@ Route::middleware('auth')->group(function () {
         'store',
     ]);
     Route::resource('ships', ShipController::class)->only([
-        'index', 'show',
+        'index', 'show', 'store',
     ]);
     Route::resource('systems', SystemController::class)->only([
         'index', 'show',
     ]);
     Route::resource('systems.waypoints', WaypointController::class)->only([
         'show',
+    ]);
+    Route::resource('systems.waypoints.shipyard', ShipyardController::class)->only([
+        'index',
     ]);
 });
 
