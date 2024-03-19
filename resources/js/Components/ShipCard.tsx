@@ -7,17 +7,17 @@ import { useShipStatusColors } from "@/hooks/useShipStatusColors";
 import { Badge } from "./catalyst/badge";
 import { Link } from "./catalyst/link";
 
-import type { ShipDetails } from "@/types/space-traders-api/ship";
+import type { Ship } from "@/types/space-traders-api/ship";
 
-export function ShipCard({ shipDetails }: { shipDetails: ShipDetails }) {
+export function ShipCard({ ship }: { ship: Ship }) {
     const avatar = useShipAvatar(
-        shipDetails.registration.role,
-        shipDetails.registration.name,
+        ship.registration.role,
+        ship.registration.name,
     );
 
-    const { tailwindPalette } = useShipStatusColors(shipDetails.nav.status);
+    const { tailwindPalette } = useShipStatusColors(ship.nav.status);
     const { textClass: roleTextClass } = useShipRoleColors(
-        shipDetails.registration.role,
+        ship.registration.role,
     );
 
     return (
@@ -26,21 +26,19 @@ export function ShipCard({ shipDetails }: { shipDetails: ShipDetails }) {
                 <img
                     className="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
                     src={avatar}
-                    alt={`Avatar for ${shipDetails.registration.name}`}
+                    alt={`Avatar for ${ship.registration.name}`}
                 />
                 <h3 className="mt-6 text-sm font-medium text-gray-900">
-                    {shipDetails.registration.name}
+                    {ship.registration.name}
                 </h3>
                 <dl className="mt-1 flex flex-grow flex-col justify-between">
                     <dt className="sr-only">Title</dt>
                     <dd className={clsx("text-sm", roleTextClass)}>
-                        {shipDetails.registration.role}
+                        {ship.registration.role}
                     </dd>
                     <dt className="sr-only">Role</dt>
                     <dd className="mt-3">
-                        <Badge color={tailwindPalette}>
-                            {shipDetails.nav.status}
-                        </Badge>
+                        <Badge color={tailwindPalette}>{ship.nav.status}</Badge>
                     </dd>
                 </dl>
             </div>
@@ -50,8 +48,8 @@ export function ShipCard({ shipDetails }: { shipDetails: ShipDetails }) {
                         <div className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
                             <Link
                                 href={route("systems.waypoints.show", [
-                                    shipDetails.nav.systemSymbol,
-                                    shipDetails.nav.waypointSymbol,
+                                    ship.nav.systemSymbol,
+                                    ship.nav.waypointSymbol,
                                 ])}
                             >
                                 Waypoint
@@ -60,9 +58,7 @@ export function ShipCard({ shipDetails }: { shipDetails: ShipDetails }) {
                     </div>
                     <div className="-ml-px flex w-0 flex-1">
                         <div className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
-                            <Link
-                                href={route("ships.show", shipDetails.symbol)}
-                            >
+                            <Link href={route("ships.show", ship.symbol)}>
                                 Details
                             </Link>
                         </div>

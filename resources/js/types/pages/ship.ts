@@ -1,6 +1,13 @@
-import type { SpaceTraderPaginationResponse } from "../space-traders-api";
-import type { ShipDetails } from "../space-traders-api/ship";
+import type {
+    SpaceTraderPaginationResponse,
+    SpaceTraderResponse,
+} from "../space-traders-api";
+import type { Ship } from "../space-traders-api/ship";
 
 export type ShipIndexProps = {
-    listShips: SpaceTraderPaginationResponse<ShipDetails>;
+    listShips: SpaceTraderPaginationResponse<Ship>;
+};
+
+export type ShipShowProps = {
+    shipDetails: SpaceTraderResponse<Ship>;
 };

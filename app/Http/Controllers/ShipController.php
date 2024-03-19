@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
@@ -43,9 +44,21 @@ class ShipController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $shipSymbol, Request $request)
     {
-        dd($id);
+        $agentToken = optional($request->user()->activeAgent)->token;
+
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool
+                ->withToken(Crypt::decryptString($agentToken))->withUrlParameters([
+                    'shipSymbol' => $shipSymbol,
+                ])
+                ->get('https://api.spacetraders.io/v2/my/ships/{shipSymbol}'),
+        ]);
+
+        return Inertia::render('Ships/Show', [
+            'shipDetails' => $responses[0]->json(),
+        ]);
     }
 
     /**

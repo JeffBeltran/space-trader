@@ -1,3 +1,6 @@
+import type { TradeSymbol } from "./trade";
+import type { WaypointType } from "./waypoint";
+
 export type ShipNavStatus = "IN_TRANSIT" | "DOCKED" | "IN_ORBIT";
 
 type ShipNavFlightMode = "CRUISE" | "DRIFT" | "STEALTH" | "BURN";
@@ -123,45 +126,71 @@ type ShipMountDeposits =
     | "URANITE_ORE"
     | "MERITIUM_ORE";
 
-export type ShipDetails = {
+export type ShipRegistration = {
+    name: string;
+    factionSymbol: string;
+    role: ShipRole;
+};
+
+type ShipNavRouteWaypoint = {
     symbol: string;
-    registration: {
-        name: string;
-        factionSymbol: string;
-        role: ShipRole;
+    type: WaypointType;
+    systemSymbol: string;
+    x: number;
+    y: number;
+};
+
+type ShipNavRoute = {
+    destination: ShipNavRouteWaypoint;
+    origin: ShipNavRouteWaypoint;
+    departureTime: string;
+    arrival: string;
+};
+
+type ShipNav = {
+    systemSymbol: string;
+    waypointSymbol: string;
+    route: ShipNavRoute;
+    status: ShipNavStatus;
+    flightMode: ShipNavFlightMode;
+};
+
+type ShipCrew = {
+    current: number;
+    required: number;
+    capacity: number;
+    rotation: ShipCrewRotation;
+    morale: number;
+    wages: number;
+};
+
+type ShipCargoItem = {
+    symbol: TradeSymbol;
+    name: string;
+    description: string;
+    units: number;
+};
+
+type ShipCargo = {
+    capacity: number;
+    units: number;
+    inventory: Array<ShipCargoItem>;
+};
+
+type ShipFuel = {
+    current: number;
+    capacity: number;
+    consumed: {
+        amount: number;
+        timestamp: string;
     };
-    nav: {
-        systemSymbol: string;
-        waypointSymbol: string;
-        route: {
-            destination: {
-                symbol: string;
-                type: string;
-                systemSymbol: string;
-                x: number;
-                y: number;
-            };
-            origin: {
-                symbol: string;
-                type: string;
-                systemSymbol: string;
-                x: number;
-                y: number;
-            };
-            departureTime: string;
-            arrival: string;
-        };
-        status: ShipNavStatus;
-        flightMode: ShipNavFlightMode;
-    };
-    crew: {
-        current: number;
-        required: number;
-        capacity: number;
-        rotation: ShipCrewRotation;
-        morale: number;
-        wages: number;
-    };
+};
+
+export type Ship = {
+    symbol: string;
+    registration: ShipRegistration;
+    nav: ShipNav;
+    crew: ShipCrew;
     frame: ShipFrame;
     reactor: ShipReactor;
     engine: ShipEngine;
@@ -173,26 +202,8 @@ export type ShipDetails = {
     };
     modules: Array<ShipModule>;
     mounts: Array<ShipMount>;
-    cargo: {
-        capacity: number;
-        units: number;
-        inventory: [
-            {
-                symbol: string;
-                name: string;
-                description: string;
-                units: number;
-            },
-        ];
-    };
-    fuel: {
-        current: number;
-        capacity: number;
-        consumed: {
-            amount: number;
-            timestamp: string;
-        };
-    };
+    cargo: ShipCargo;
+    fuel: ShipFuel;
 };
 
 type ShipyardTransaction = {
