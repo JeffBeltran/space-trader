@@ -2,9 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Head } from "@inertiajs/react";
 import clsx from "clsx";
 import { DateTime } from "luxon";
-import { useState } from "react";
 
-import { Button } from "@/Components/catalyst/button";
 import { Link } from "@/Components/catalyst/link";
 import {
     Table,
@@ -20,14 +18,12 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import type { PageProps } from "@/types";
 import type { ShipyardIndexProps } from "@/types/pages/shipyard";
-import type { ShipyardShip } from "@/types/space-traders-api/ship";
 
 export default function Show({
     auth,
     waypointDetails,
     shipyardDetails,
 }: PageProps<ShipyardIndexProps>) {
-    const [selectedShip, setSelectedShip] = useState<ShipyardShip | null>(null);
     console.log(shipyardDetails);
 
     const totalShips = shipyardDetails.data.ships?.length ?? 0;
@@ -173,15 +169,12 @@ export default function Show({
                                             <TableCell>
                                                 {ship.purchasePrice.toLocaleString()}
                                             </TableCell>
-                                            <TableCell>
-                                                <Button
-                                                    onClick={() =>
-                                                        setSelectedShip(ship)
-                                                    }
-                                                >
-                                                    View
-                                                </Button>
-                                            </TableCell>
+                                            <ShipyardSlideOver
+                                                shipyardDetails={
+                                                    shipyardDetails.data
+                                                }
+                                                shipDetails={ship}
+                                            />
                                         </TableRow>
                                     ))}
                                 </TableBody>
@@ -247,10 +240,6 @@ export default function Show({
                         </div>
                     </div>
                 </div>
-                <ShipyardSlideOver
-                    shipDetails={selectedShip}
-                    onClose={() => setSelectedShip(null)}
-                />
             </main>
         </AuthenticatedLayout>
     );

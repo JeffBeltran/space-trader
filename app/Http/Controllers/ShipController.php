@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreShipRequest;
 use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -36,9 +37,22 @@ class ShipController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreShipRequest $request)
     {
-        //
+        $agentToken = optional($request->user()->activeAgent)->token;
+
+        $response = Http::withToken(Crypt::decryptString($agentToken))
+            ->post('https://api.spacetraders.io/v2/my/ships', [
+                'shipType' => $request->shipType,
+                'waypointSymbol' => $request->waypointSymbol,
+            ]);
+
+        if ($response->successful()) {
+            return redirect()->route('ships.show', ['ship' => $response->json('data.ship.symbol')]);
+        }
+
+        dd($response->json());
+
     }
 
     /**
