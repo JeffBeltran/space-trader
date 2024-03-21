@@ -1,5 +1,6 @@
 import { Head } from "@inertiajs/react";
 
+import { SystemWaypointsCard } from "@/Components/SystemWaypointsCard";
 import { useShipAvatar } from "@/hooks/useShipAvatar";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
@@ -12,7 +13,6 @@ export default function Index({ auth, shipDetails }: PageProps<ShipShowProps>) {
         shipDetails.data.registration.name,
     );
 
-    console.log(shipDetails);
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -45,9 +45,9 @@ export default function Index({ auth, shipDetails }: PageProps<ShipShowProps>) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden rounded-lg bg-white shadow">
-                        <div className="px-4 py-5 sm:p-6">
-                            {/* Content goes here */}
-                        </div>
+                        <SystemWaypointsCard
+                            systemSymbol={shipDetails.data.nav.systemSymbol}
+                        />
                     </div>
                 </div>
             </div>

@@ -42,6 +42,8 @@
         "@dicebear/collection": "^7.1.1",
         "@dicebear/core": "^7.1.1",
         "@heroicons/react": "^2.1.1",
+        "@tanstack/react-query": "^5.28.4",
+        "@tanstack/react-query-devtools": "^5.28.4",
         "clsx": "^2.1.0",
         "luxon": "^3.4.4",
         "prando": "^6.0.1"
