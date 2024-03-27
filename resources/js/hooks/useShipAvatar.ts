@@ -1,18 +1,19 @@
 import { bottts } from "@dicebear/collection";
 import { createAvatar } from "@dicebear/core";
-import { useMemo } from "react";
 
-import { useShipRoleColors } from "./useShipRoleColors";
+import { shipRoleColorMap } from "./useShipRoleColors";
 
 import type { ShipRole } from "@/types/space-traders-api/ship";
 
-export function useShipAvatar(role: ShipRole, name?: string) {
-    const { rgb } = useShipRoleColors(role);
+export function useShipAvatar(role?: ShipRole, name?: string) {
+    if (!role) {
+        return null;
+    }
 
-    return useMemo(() => {
-        return createAvatar(bottts, {
-            seed: name,
-            baseColor: [rgb],
-        }).toDataUriSync();
-    }, [rgb, name]);
+    const rgb = shipRoleColorMap[role].rgb;
+
+    return createAvatar(bottts, {
+        seed: name,
+        baseColor: [rgb],
+    }).toDataUriSync();
 }

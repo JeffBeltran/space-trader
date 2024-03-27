@@ -25,7 +25,7 @@ type ColorInfo = {
     tailwindPalette: TailwindPalette;
 };
 
-const shipRoleColorMap: Record<ShipRole, ColorInfo> = {
+export const shipRoleColorMap: Record<ShipRole, ColorInfo> = {
     // Resource Collection (Green)
     HARVESTER: {
         hex: "#84cc16",

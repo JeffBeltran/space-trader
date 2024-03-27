@@ -16,8 +16,6 @@ export default function Show({
     waypointDetails,
     systemDetails,
 }: PageProps<WaypointShowProps>) {
-    console.log(waypointDetails);
-
     const { textClass } = useWaypointColors(waypointDetails.data.type);
 
     const hasShipyard = waypointDetails.data.traits.some(

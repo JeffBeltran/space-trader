@@ -24,8 +24,6 @@ export default function Show({
     waypointDetails,
     shipyardDetails,
 }: PageProps<ShipyardIndexProps>) {
-    console.log(shipyardDetails);
-
     const totalShips = shipyardDetails.data.ships?.length ?? 0;
 
     return (

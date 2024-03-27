@@ -9,7 +9,7 @@ type ColorInfo = {
     tailwindPalette: "red" | "green" | "yellow";
 };
 
-const shipColorMap: Record<ShipNavStatus, ColorInfo> = {
+export const shipColorMap: Record<ShipNavStatus, ColorInfo> = {
     IN_TRANSIT: {
         hex: "#ef4444",
         rgb: "ef4444",

@@ -127,37 +127,42 @@ export function ServerStatus({ status }: { status: GetStatusResponse }) {
                         </dt>
                         <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                             <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
-                                {status.leaderboards.mostCredits.map(
-                                    (mostCredit, idx) => {
-                                        return (
-                                            <li
-                                                key={
-                                                    mostCredit.agentSymbol + idx
-                                                }
-                                                className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6"
-                                            >
-                                                <div className="flex w-0 flex-1 items-center">
-                                                    <div className="flex min-w-0 flex-1 gap-2">
-                                                        <Link
-                                                            preserveScroll
-                                                            className="truncate font-medium"
-                                                            href={route(
-                                                                "agents.show",
-                                                                mostCredit.agentSymbol,
-                                                            )}
-                                                        >
-                                                            {
-                                                                mostCredit.agentSymbol
-                                                            }
-                                                        </Link>
-                                                        <span className="flex-shrink-0 text-gray-400">
-                                                            {mostCredit.credits.toLocaleString()}
-                                                        </span>
+                                {status.leaderboards.mostCredits.length > 0 ? (
+                                    status.leaderboards.mostCredits.map(
+                                        (mostCredit, idx) => {
+                                            return (
+                                                <li
+                                                    key={
+                                                        mostCredit.agentSymbol +
+                                                        idx
+                                                    }
+                                                    className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6"
+                                                >
+                                                    <div className="flex w-0 flex-1 items-center">
+                                                        <div className="flex min-w-0 flex-1 gap-2">
+                                                            <Link
+                                                                preserveScroll
+                                                                className="truncate font-medium"
+                                                                href={route(
+                                                                    "agents.show",
+                                                                    mostCredit.agentSymbol,
+                                                                )}
+                                                            >
+                                                                {
+                                                                    mostCredit.agentSymbol
+                                                                }
+                                                            </Link>
+                                                            <span className="flex-shrink-0 text-gray-400">
+                                                                {mostCredit.credits.toLocaleString()}
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        );
-                                    },
+                                                </li>
+                                            );
+                                        },
+                                    )
+                                ) : (
+                                    <NoData />
                                 )}
                             </ul>
                         </dd>

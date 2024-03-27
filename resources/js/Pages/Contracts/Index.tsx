@@ -10,8 +10,6 @@ export default function Index({
     auth,
     listContracts,
 }: PageProps<ContractIndexProps>) {
-    console.log(listContracts);
-
     return (
         <AuthenticatedLayout
             user={auth.user}

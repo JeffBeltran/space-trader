@@ -17,7 +17,6 @@ export default function Index({
     systemMap,
 }: PageProps<SystemShowProps>) {
     const { textClass } = useSystemColors(systemMap.type);
-    console.log(waypoints);
     return (
         <AuthenticatedLayout
             user={auth.user}

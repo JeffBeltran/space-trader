@@ -132,7 +132,7 @@ export type ShipRegistration = {
     role: ShipRole;
 };
 
-type ShipNavRouteWaypoint = {
+export type ShipNavRouteWaypoint = {
     symbol: string;
     type: WaypointType;
     systemSymbol: string;
@@ -147,7 +147,7 @@ type ShipNavRoute = {
     arrival: string;
 };
 
-type ShipNav = {
+export type ShipNav = {
     systemSymbol: string;
     waypointSymbol: string;
     route: ShipNavRoute;

@@ -9,8 +9,6 @@ export default function Index({
     auth,
     listSystems,
 }: PageProps<SystemIndexProps>) {
-    console.log(listSystems);
-
     return (
         <AuthenticatedLayout
             user={auth.user}

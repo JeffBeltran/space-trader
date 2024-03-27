@@ -7,7 +7,6 @@ import type { PageProps } from "@/types";
 import type { ShipIndexProps } from "@/types/pages/ship";
 
 export default function Index({ auth, listShips }: PageProps<ShipIndexProps>) {
-    console.log(listShips);
     return (
         <AuthenticatedLayout
             user={auth.user}
