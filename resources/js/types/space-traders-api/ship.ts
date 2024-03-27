@@ -198,7 +198,7 @@ export type Ship = {
         shipSymbol: string;
         totalSeconds: number;
         remainingSeconds: number;
-        expiration: string;
+        expiration?: string;
     };
     modules: Array<ShipModule>;
     mounts: Array<ShipMount>;

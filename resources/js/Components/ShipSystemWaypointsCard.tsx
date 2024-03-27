@@ -2,7 +2,9 @@ import { router } from "@inertiajs/react";
 
 import { useShip } from "@/hooks/useShip";
 import { useSystemWaypoints } from "@/hooks/useSystemWaypoints";
+import { waypointColorMap } from "@/hooks/useWaypointColors";
 
+import { Badge } from "./catalyst/badge";
 import { Button } from "./catalyst/button";
 import { Link } from "./catalyst/link";
 import { Listbox, ListboxLabel, ListboxOption } from "./catalyst/listbox";
@@ -45,6 +47,8 @@ export function ShipSystemWaypointsCard({
     const systemWaypoints = useSystemWaypoints(
         shipDetails.data?.nav.systemSymbol,
     );
+
+    console.log(systemWaypoints.data);
 
     const url = new URL(window.location.href);
 
@@ -124,7 +128,8 @@ export function ShipSystemWaypointsCard({
                         <TableRow>
                             <TableHeader>Name</TableHeader>
                             <TableHeader>Type</TableHeader>
-                            <TableHeader>Under Construction</TableHeader>
+                            <TableHeader>Construction</TableHeader>
+                            <TableHeader>Traits</TableHeader>
                             <TableHeader>Distance</TableHeader>
                             <TableHeader className="relative w-0">
                                 <span className="sr-only">Actions</span>
@@ -192,8 +197,19 @@ function WaypointRow({
                     {waypoint.symbol}
                 </Link>
             </TableCell>
-            <TableCell>{waypoint.type}</TableCell>
+            <TableCell className={waypointColorMap[waypoint.type].textClass}>
+                {waypoint.type}
+            </TableCell>
             <TableCell>{`${waypoint.isUnderConstruction}`}</TableCell>
+            <TableCell className="flex flex-wrap gap-2">
+                {waypoint.traits.map((trait) => {
+                    return (
+                        <Badge key={trait.symbol} title={trait.description}>
+                            {trait.name}
+                        </Badge>
+                    );
+                })}
+            </TableCell>
             <TableCell>{distance} AU</TableCell>
             <TableCell>
                 <Navigate

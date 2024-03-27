@@ -1,6 +1,7 @@
 import { Head } from "@inertiajs/react";
 
 import { ShipAvatar } from "@/Components/ShipAvatar";
+import { ShipCargo } from "@/Components/ShipCargo";
 import { ShipFuel } from "@/Components/ShipFuel";
 import { ShipNavigation } from "@/Components/ShipNavigation";
 import { ShipSystemWaypointsCard } from "@/Components/ShipSystemWaypointsCard";
@@ -47,7 +48,7 @@ export default function Index({ auth, shipDetails }: PageProps<ShipShowProps>) {
                 <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-3 gap-6">
                         <ShipFuel shipSymbol={ship.data.registration.name} />
-                        <div>action</div>
+                        <ShipCargo shipSymbol={ship.data.registration.name} />
                         <ShipNavigation
                             shipSymbol={ship.data.registration.name}
                         />

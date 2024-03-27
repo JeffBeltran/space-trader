@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ShipController;
 use App\Http\Controllers\API\ShipDockController;
+use App\Http\Controllers\API\ShipExtractController;
 use App\Http\Controllers\API\ShipNavigateController;
 use App\Http\Controllers\API\ShipOrbitController;
 use App\Http\Controllers\API\ShipRefuelController;
@@ -41,6 +42,9 @@ Route::name('api.')->middleware('auth:sanctum')->group(function () {
         'store',
     ]);
     Route::resource('ships.refuel', ShipRefuelController::class)->only([
+        'store',
+    ]);
+    Route::resource('ships.extract', ShipExtractController::class)->only([
         'store',
     ]);
 });
