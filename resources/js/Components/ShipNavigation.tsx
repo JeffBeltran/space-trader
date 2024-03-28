@@ -1,5 +1,4 @@
 import { router } from "@inertiajs/react";
-import { DateTime } from "luxon";
 
 import { useShip } from "@/hooks/useShip";
 import { shipColorMap } from "@/hooks/useShipStatusColors";
@@ -29,7 +28,6 @@ export function ShipNavigation({ shipSymbol }: { shipSymbol: string }) {
                     >
                         {ship.data.nav.status}
                     </Badge>
-                    {DateTime.fromISO(ship.data.nav.route.arrival).toRelative()}
                 </div>
 
                 <Link

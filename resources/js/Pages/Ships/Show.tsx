@@ -2,6 +2,7 @@ import { Head } from "@inertiajs/react";
 
 import { ShipAvatar } from "@/Components/ShipAvatar";
 import { ShipCargo } from "@/Components/ShipCargo";
+import { ShipCargoListCard } from "@/Components/ShipCargoListCard";
 import { ShipFuel } from "@/Components/ShipFuel";
 import { ShipNavigation } from "@/Components/ShipNavigation";
 import { ShipSystemWaypointsCard } from "@/Components/ShipSystemWaypointsCard";
@@ -53,11 +54,9 @@ export default function Index({ auth, shipDetails }: PageProps<ShipShowProps>) {
                             shipSymbol={ship.data.registration.name}
                         />
                     </div>
-                    <div className="overflow-hidden rounded-lg bg-white shadow">
-                        <ShipSystemWaypointsCard
-                            shipSymbol={ship.data.symbol}
-                        />
-                    </div>
+
+                    <ShipCargoListCard shipSymbol={ship.data.symbol} />
+                    <ShipSystemWaypointsCard shipSymbol={ship.data.symbol} />
                 </div>
             </div>
         </AuthenticatedLayout>

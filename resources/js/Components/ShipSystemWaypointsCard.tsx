@@ -4,7 +4,7 @@ import { useShip } from "@/hooks/useShip";
 import { useSystemWaypoints } from "@/hooks/useSystemWaypoints";
 import { waypointColorMap } from "@/hooks/useWaypointColors";
 
-import { Badge } from "./catalyst/badge";
+import { BadgeButton } from "./catalyst/badge";
 import { Button } from "./catalyst/button";
 import { Link } from "./catalyst/link";
 import { Listbox, ListboxLabel, ListboxOption } from "./catalyst/listbox";
@@ -19,7 +19,10 @@ import {
 import { Navigate } from "./Navigate";
 
 import type { Ship } from "@/types/space-traders-api/ship";
-import type { Waypoint } from "@/types/space-traders-api/waypoint";
+import type {
+    Waypoint,
+    WaypointTraitSymbol,
+} from "@/types/space-traders-api/waypoint";
 
 const WAYPOINT_TYPES = [
     "PLANET",
@@ -48,9 +51,21 @@ export function ShipSystemWaypointsCard({
         shipDetails.data?.nav.systemSymbol,
     );
 
-    console.log(systemWaypoints.data);
-
     const url = new URL(window.location.href);
+    const selectedType = url.searchParams.get("type") || "";
+    const selectedTraits = url.searchParams.getAll("traits");
+
+    function handleTraitClick(trait: WaypointTraitSymbol) {
+        if (selectedTraits.includes(trait)) {
+            const newTraits = selectedTraits.filter((t) => t !== trait);
+            url.searchParams.delete("traits");
+            newTraits.forEach((t) => url.searchParams.append("traits", t));
+            router.visit(url.toString(), { preserveScroll: true });
+        } else {
+            url.searchParams.append("traits", trait);
+            router.visit(url.toString(), { preserveScroll: true });
+        }
+    }
 
     if (!shipDetails.data || !systemWaypoints.data) {
         return <div>Loading...</div>;
@@ -82,26 +97,18 @@ export function ShipSystemWaypointsCard({
                     <div className="ml-4 mt-2 flex-shrink-0">
                         <Listbox
                             name="type"
-                            defaultValue={url.searchParams.get("type") || ""}
-                            value={url.searchParams.get("type") || ""}
+                            value={selectedType}
                             onChange={(type) => {
-                                const currentRoute = route().current();
-
-                                if (currentRoute) {
-                                    if (type) {
-                                        router.visit(
-                                            route(currentRoute, {
-                                                ship: route().params.ship,
-                                                type,
-                                            }),
-                                        );
-                                    } else {
-                                        router.visit(
-                                            route(currentRoute, {
-                                                ship: route().params.ship,
-                                            }),
-                                        );
-                                    }
+                                if (type) {
+                                    url.searchParams.set("type", type);
+                                    router.visit(url.toString(), {
+                                        preserveScroll: true,
+                                    });
+                                } else {
+                                    url.searchParams.delete("type");
+                                    router.visit(url.toString(), {
+                                        preserveScroll: true,
+                                    });
                                 }
                             }}
                         >
@@ -119,7 +126,7 @@ export function ShipSystemWaypointsCard({
                     </div>
                 </div>
             </div>
-            <div className="px-4">
+            <div className="px-4 sm:px-6">
                 <Table
                     bleed
                     className="[--gutter:theme(spacing.6)] sm:[--gutter:theme(spacing.8)]"
@@ -143,6 +150,7 @@ export function ShipSystemWaypointsCard({
                                     key={waypoint.symbol}
                                     waypoint={waypoint}
                                     shipDetails={shipDetails.data}
+                                    onTraitClick={handleTraitClick}
                                 />
                             ))}
                     </TableBody>
@@ -172,11 +180,17 @@ export function ShipSystemWaypointsCard({
 function WaypointRow({
     waypoint,
     shipDetails,
+    onTraitClick,
 }: {
     waypoint: Waypoint;
     shipDetails: Ship;
+    onTraitClick: (trait: WaypointTraitSymbol) => void;
 }) {
     const currentLocation = shipDetails.nav.route.destination;
+
+    const url = new URL(window.location.href);
+
+    const selectedTraits = url.searchParams.getAll("traits");
 
     const distance = Math.round(
         Math.sqrt(
@@ -204,9 +218,18 @@ function WaypointRow({
             <TableCell className="flex flex-wrap gap-2">
                 {waypoint.traits.map((trait) => {
                     return (
-                        <Badge key={trait.symbol} title={trait.description}>
+                        <BadgeButton
+                            key={trait.symbol}
+                            title={trait.description}
+                            onClick={() => onTraitClick(trait.symbol)}
+                            color={
+                                selectedTraits.includes(trait.symbol)
+                                    ? "lime"
+                                    : "zinc"
+                            }
+                        >
                             {trait.name}
-                        </Badge>
+                        </BadgeButton>
                     );
                 })}
             </TableCell>

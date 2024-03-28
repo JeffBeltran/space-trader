@@ -39,8 +39,6 @@ export function ShipCargo({ shipSymbol }: { shipSymbol: string }) {
 
     const ship = useShip(shipSymbol);
 
-    console.log(ship.data);
-
     const mutation = useMutation({
         mutationFn: () => {
             return window.axios.post(
