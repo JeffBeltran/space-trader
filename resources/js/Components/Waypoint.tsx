@@ -1,12 +1,10 @@
 import clsx from "clsx";
 
-import { useWaypointColors } from "@/hooks/useWaypointColors";
+import { waypointColorMap } from "@/hooks/useWaypointColors";
 
 import type { SystemWaypoint } from "@/types/space-traders-api/system";
 
 export function Waypoint({ waypoint }: { waypoint: SystemWaypoint }) {
-    const { textClass } = useWaypointColors(waypoint.type);
-
     return (
         <g>
             <circle
@@ -14,7 +12,10 @@ export function Waypoint({ waypoint }: { waypoint: SystemWaypoint }) {
                 cx={waypoint.x}
                 cy={waypoint.y}
                 r={2}
-                className={clsx("fill-current", textClass)}
+                className={clsx(
+                    "fill-current",
+                    waypointColorMap[waypoint.type].textClass,
+                )}
             />
             {waypoint.orbitals.length && (
                 <circle

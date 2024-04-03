@@ -1,14 +1,12 @@
 import clsx from "clsx";
 
-import { useSystemColors } from "@/hooks/useSystemColors";
+import { systemTypeColorMap } from "@/hooks/useSystemColors";
 
 import { Waypoint } from "./Waypoint";
 
 import type { System } from "@/types/space-traders-api/system";
 
 export function SystemMap({ system }: { system: System }) {
-    const { textClass } = useSystemColors(system.type);
-
     const data = system.waypoints.filter((waypoint) => {
         return waypoint.type !== "ASTEROID" && waypoint.orbits === undefined;
     });
@@ -74,7 +72,10 @@ export function SystemMap({ system }: { system: System }) {
                     cx={canvasSquare / 2}
                     cy={canvasSquare / 2}
                     r={4}
-                    className={clsx("fill-current", textClass)}
+                    className={clsx(
+                        "fill-current",
+                        systemTypeColorMap[system.type].textClass,
+                    )}
                 />
                 {mappedData.map((item) => (
                     <Waypoint key={item.symbol} waypoint={item} />
